@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-12">
+    <h4>{{title}}</h4>
+    <ul class="list-unstyled">
+      <li *ngFor="let item of userstories | keyvalue"><app-userstory [story]=item.value [listId]=id [key]=item.key></app-userstory></li>
+      <li *ngIf="this.id == 0">
+        <div class="card shadow-sm mt-2">
+          <div class="card-body">
+            <h5 class="card-title">Add card</h5>
+            <form>
+              <label for="storyId" class="mb-0">ID</label>
+              <input type="number" name="storyId" id="storyId" class="form-control" [(ngModel)]="userstory.id">
+              <label for="storyTitle" class="mb-0 mt-2">Title</label>
+              <input type="text" name="storyTitle" id="storyTitle" class="form-control" [(ngModel)]="userstory.title">
+              <label for="storyDescription" class="mb-0 mt-2">Description</label>
+              <input type="text" name="storyDescription" id="storyDescription" class="form-control" [(ngModel)]="userstory.description">
+              <label for="storyPoints" class="mb-0 mt-2">Points</label>
+              <input type="number" name="storyPoints" id="storyPoints" class="form-control" [(ngModel)]="userstory.points">
+              <button type="submit" class="btn-block btn btn-primary mt-2" (click)="submit()">Save</button>
+            </form>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
