@@ -6,6 +6,8 @@ import {EventEmitter, Injectable, Output} from '@angular/core';
 export class StorageService {
     @Output() refresh: EventEmitter<any> = new EventEmitter();
 
+    private STORAGEKEY = 'scrumboard';
+
     constructor() {
         if (null === localStorage.getItem('scrumboard')) {
             console.log('There are no stories yet, making an object in storage..');
@@ -16,7 +18,7 @@ export class StorageService {
     }
 
     getStories(id) {
-        let userstories = JSON.parse(localStorage.getItem('scrumboard'));
+        let userstories = JSON.parse(localStorage.getItem(this.STORAGEKEY));
         userstories = userstories[id];
         if (undefined === userstories) {
             return [];
@@ -59,10 +61,10 @@ export class StorageService {
     }
 
     saveList(listId, list) {
-        const userstories = JSON.parse(localStorage.getItem('scrumboard'));
+        const userstories = JSON.parse(localStorage.getItem(this.STORAGEKEY));
         userstories[listId] = list;
 
-        localStorage.setItem('scrumboard', JSON.stringify(userstories));
+        localStorage.setItem(this.STORAGEKEY, JSON.stringify(userstories));
         this.refresh.emit(null);
     }
 }
