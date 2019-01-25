@@ -45,30 +45,15 @@ export class StorageService {
             return;
         }
 
-        console.log(userstoriesSecondList);
-
         // add to second list
         userstoriesSecondList.push(userstory);
-
-        console.log(userstoriesSecondList);
 
         // remove from first list
         userstoriesFirstList.splice(storyId, 1);
 
-        if (listId == 0) {
-            this.saveList(0, userstoriesFirstList);
-            this.saveList(1, userstoriesSecondList);
-        }
-
-        if (listId == 1) {
-            this.saveList(1, userstoriesFirstList);
-            this.saveList(2, userstoriesSecondList);
-        }
-
-        if (listId == 2) {
-            this.saveList(2, userstoriesFirstList);
-            this.saveList(3, userstoriesSecondList);
-        }
+        // save both lists
+        this.saveList(listId, userstoriesFirstList);
+        this.saveList(Number(listId) + 1, userstoriesSecondList);
 
         return;
     }
